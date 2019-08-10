@@ -1,0 +1,84 @@
+.wrap{
+    width:100%;
+}
+.a{
+    width: 600px;
+    margin: 0 auto;
+    height: 100px;
+}
+.fl{
+float: left;
+}
+.main{
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    line-height:100px;
+    border: #e8eaed 1px solid;
+}
+.main_header{
+    width: 600px;
+    height: 100px;
+    text-align: center;
+    font-size: 40px;
+    background: white;
+}
+.main_main{
+    width: 500px;
+    height: 400px;
+    padding-left: 100px;
+}
+.main_input_text{
+    width: 400px;
+    height: 50px;
+    text-align: center;
+    border: #e8eaed 1px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline:none;
+
+}
+.main_input_password{
+    display: block;
+    width: 400px;
+    height: 50px;
+    text-align: center;
+    border: #e8eaed 1px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline:none;
+
+}
+.main_input_password_{
+    display: none;
+    width: 400px;
+    height: 50px;
+    text-align: center;
+    border: #e8eaed 1px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline:none;
+}
+.c{
+    width: 50px;
+    height: 50px;
+    margin-bottom: 50px;
+}
+.main_input_submit{
+    width: 400px;
+    height: 50px;
+    text-align: center;
+}
+.b{
+    width: 600px;
+    height: 100px;
+    padding: auto;
+}
+.footer{
+    width: 600px;
+    height: 100px;
+    text-align: center;
+    font-size: 28px;
