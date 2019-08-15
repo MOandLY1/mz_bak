@@ -86,6 +86,37 @@ function leave_secondary_nav(a){
     var v = a+'bb';
     $('.'+v).css("display","none");
 }
+
+function _Secondary_navigation(a){    //鼠标移动到导航栏，展示二级导航
+   // alert(a);
+   $('.Secondary_navigation').css("display","none");
+   var v = a+'bb';
+   $('.'+v).css("display","block")
+}//鼠标移动到导航栏，展示二级导航
+function _Secondary_navigation_(a){      //鼠标离开导航栏，关闭二级导航
+   // alert(a)
+   var div = document.getElementById(a+'bb');
+
+   // var div = $('.'+v);
+   var x=event.clientX;
+   var y=event.clientY;
+   var divx1 = div.offsetLeft;
+   var divy1 = div.offsetTop;
+   var divx2 = div.offsetLeft + div.offsetWidth;
+   var divy2 = div.offsetTop + div.offsetHeight;
+   // alert(divx1)
+   if( x < divx1 || x > divx2 || y < divy1 || y > divy2){
+       // alert(2)
+       $('.Secondary_navigation').css("display","none");
+       // $('.'+a+'bb').css("display","none");
+   }
+}//鼠标离开一级导航栏，关闭二级导航
+function _leave_secondary_nav(a){
+   $('.Secondary_navigation').css("display","none");
+   var v = a+'bb';
+   $('.'+v).css("display","none");
+}
+
 function commodity_details(a){
 
     // alert(a);
@@ -94,6 +125,21 @@ function commodity_details(a){
 }
 
                                  //注册页面的JS效果
+function email(){
+    var email = $('#email').val();
+    $.ajax({
+        type: 'GET',
+        url: './email',
+        data: {email:email},
+        dataType: "json",
+        success: function (data) {
+            alert(data.info)
+            if(data.code==1){
+            }
+        },
+    });
+    alert('已发送')
+}
 function switch_password1(){    //点击切换密码明文暗文，切换时将之前输入的内容传给切换后的框
     var v = $('#password').css("display");
     if(v=='block'){
@@ -124,6 +170,9 @@ function switch_password2(){    //点击切换密码明文暗文，切换时将�
 }//点击切换密码明文暗文，切换时将之前输入的内容传给切换后的框/确认密码
 function register(){            //注册。JS效果为把信息提交给后端，再响应后端传回的数据
     var name = $('#name').val();
+    var email = $('#email').val();
+    var verification = $('#verification').val();
+
     var v = $('#password').css("display");
     if(v=='block'){
         var password = $('#password').val();
@@ -139,7 +188,7 @@ function register(){            //注册。JS效果为把信息提交给后端�
     $.ajax({
         type: 'GET',
         url: './user_r',
-        data: {name:name,password:password,password_:password_},
+        data: {name:name,password:password,password_:password_,email:email,verification:verification},
         dataType: "json",
         success: function (data) {
             alert(data.info)
@@ -183,7 +232,7 @@ function Submission() {              //登录，JS效果为把信息提交给后
             alert(data.info);
             if(data.code==1){
                 modify_name_();
-                window.location.href="/mzsc";
+                window.location.href="/mzsc1";
             }
         },
     });
@@ -326,10 +375,28 @@ function binding_phone(){       //绑定手机
 
 //商品详情的JS效果
 function myFunction(){
-    alert('.img_'+1);
     $('.img_'+1).css("display", "block");
 }
+function switch_img(a){
+    $('.img_').css("display", "none");
+    $('.img_'+a).css("display", "block");
 
+}
+function province(){
+    var options=$("#province option:selected");
+    var province = options.text();
+    $.ajax({
+        type:'GET',
+        url:'./insert_province',
+        data:{province:province},
+        dataType:"json",
+        success: function(data){
+            if(data.code==1){
+                alert(data.data)
+            }
+        }
+    })
+}
 
 
 

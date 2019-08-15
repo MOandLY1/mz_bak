@@ -44,6 +44,9 @@ Route::group(['namespace'=>'Admin','middleware'=>'api'],function () {
     Route::match(['post', 'get'], '/query_commodity_name', 'IndexController@query_commodity_name');
     Route::match(['post', 'get'], '/query_commodity_name_', 'IndexController@query_commodity_name_');
     Route::match(['post', 'get'], '/query_selection_color_capacity', 'IndexController@query_selection_color_capacity');
+    Route::match(['post', 'get'], '/query_region', 'IndexController@query_region');
+    Route::match(['post', 'get'], '/insert_region', 'IndexController@insert_region');
+    Route::match(['post', 'get'], '/query_region_', 'IndexController@query_region_');
 
 
 

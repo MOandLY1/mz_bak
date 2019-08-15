@@ -11,6 +11,7 @@ use App\Models\Commodity;
 use App\Models\Controller_;
 use App\Models\Color_;
 use App\Models\Memory;
+use App\Models\Address;
 use App\Models\Commodity_details;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -413,6 +414,7 @@ class IndexController extends Controller
     }//写入新商品--添加属性
     public function query_appoint_commodity(Request $request){//写入最下级商品
         $name = $request->input('name');
+        $supervisor_display = $request->input('supervisor_display');
         $superior_id = $request->input('superior_id');
         $color = $request->input('color');
         $capacity = $request->input('capacity');
@@ -430,6 +432,7 @@ class IndexController extends Controller
             'price'=>$price,
             'details'=>$details,
             'img'=>json_encode($img),
+            'supervisor_display'=>$supervisor_display,
             'time'=>$time,
         ];
 
@@ -445,9 +448,61 @@ class IndexController extends Controller
                 'info'=>'失败',
             ]);
         }
-
     }//写入最下级商品
+    public function query_region(){//查询省级地区
+        $region = Address::where('superior_id',0)->get()->toArray();
+        if($region){
+            return response()->json([
+               'code'=>1,
+               'info'=>'成功',
+               'data'=> $region
+            ]);
+        }
+    }//查询省级地区
 
+    public function query_region_(Request $request){//查询市级地区
+        $name = $request->input('name');
+        $region = Address::where('name',$name)->get();
+        if($region){
+            return response()->json([
+                'code'=>1,
+                'info'=>'成功',
+                'data'=> $name
+            ]);
+        }
+    }//查询市级地区
+    public function insert_region(Request $request){//写入新地区
+        $superior_name = $request->input('superior_name');
+        $name = $request->input('name');
+        $superior = Address::where('name',0)->first()->toArray();
+        return response()->json([
+            'code'=>1,
+            'info'=>'成功',
+            'data'=>$superior
+        ]);
+        if($superior){
+            $superior_id = $superior['id'];
+        }else{
+            $superior_id = 0;
+        }
+        $arr  =[
+            'superior_id' => $superior_id,
+            'name' => $name
+        ];
+        $insert_region = Address::insert($arr);
+        if($insert_region){
+            return response()->json([
+               'code'=>1,
+               'info'=>'成功',
+            ]);
+        }else{
+            return response()->json([
+                'code'=>0,
+                'info'=>'失败',
+            ]);
+        }
+
+    }//写入新地区
 
 
 

@@ -27,6 +27,13 @@
                     <input id="_password_" class="main_input_password_ fl" type="text" placeholder="确认密码">
                     <span onclick="switch_password2()" class="c fl"><img src="./img/31.png" alt=""></span>
                 </div>
+                <div class="d">
+                    <input id="email" class="main_input_text fl" type="text" placeholder="输入您的邮箱">
+                    <input type="submit" onclick="email()" style="height:30px;width: 80px" value="发送验证码" class="c fl">
+                </div>
+                <div class="d">
+                    <input id="verification" class="main_input_text fl" type="text" placeholder="输入邮箱验证码">
+                </div>
                 <div class="b">
                     <input class="main_input_submit" onclick="register()" type="submit" placeholder="提交">
                 </div>

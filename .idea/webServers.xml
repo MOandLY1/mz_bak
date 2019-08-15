@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="1867da71-6a77-4cf6-a728-1db230e39204" name="liyue" url="http://148.70.97.238">
+        <fileTransfer host="148.70.97.238" port="5831" rootFolder="/home/wwwroot/web/mz_bak" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="5831" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

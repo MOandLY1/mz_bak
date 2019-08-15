@@ -74,7 +74,6 @@
     height: 80px;
 }
 .header_menu{
-    width:74px;
     text-align: center;
     height: 80px;
     line-height:80px;
@@ -89,7 +88,7 @@
     height:200px;
     background: yellow;
     position: absolute;
-    left: 300px;
+    left: 328px;
     top: 80px;
 }
 .Secondary_navigation_{              /*主页上的次级导航条，为鼠标移动事件显示的绝对定位块*/
@@ -98,7 +97,7 @@
     height:200px;
     background: #f65156;
     position: absolute;
-    left: 300px;
+    left: 328px;
     top: 208px;
 }
 .secondary_nav{                 /* 次级导航里面的具体导航内容*/
@@ -572,18 +571,25 @@
     width: 1265px;
     height: 700px;
     margin: 0 auto;
+    background: #00c3f5;
 }
 .Details_page_main_left{               /*详情页面左边*/
     width: 600px;
     height: 700px;
+
+    background: darkred;
 }
 .Details_page_main_left_centent{                  /*详情页面商品大图*/
-    width: 600px;
-    height: 580px;
+    width: 530px;
+    height: 540px;
+    padding-top: 40px;
+    padding-left: 70px;
+    background: orangered;
 }
 .Details_page_main_left_centent_Small{                  /*详情页面商品可切换的小图*/
     width: 600px;
     height: 150px;
+    background: #00c3f5;
 }
 .Details_page_main_left_centent_Small_{                  /*详情页面商品可切换的小图*/
     width: 120px;
@@ -763,8 +769,88 @@
     margin-top: 13px;
     background: red;
 }
-
-
+/*购物车*/
+.shopping_cart_main{
+    width: 1265px;
+    height: 700px;
+    background: #1b4b72;
+    margin: 0 auto;
+}
+.shopping_cart_centent_main{
+    min-height:400px;
+    height: 400px;
+    overflow-y:auto;
+    max-height:500px;
+}
+.shopping_cart_centent{
+    width: 1235px;
+    height: 50px;
+    line-height: 50px;
+    paddig-left: 30px;
+    margin-left: 30px;
+    font-size: 35px;
+}
+.shopping_cart_centent_{
+    width: 1265px;
+    height: 50px;
+    text-align: center;
+    background: blueviolet;
+    line-height: 50px;
+    font-size: 13px;
+    border: #636b6f 1px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.shopping_cart_centent_nav{
+    width: 1265px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 13px;
+    border: #636b6f 1px solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.shopping_cart_centent_img{
+    width: 100px;
+    height: 50px;
+    background: #00c3f5;
+}
+.shopping_cart_centent_fill{
+    width: 200px;
+    height: 50px;
+    background: #00c3f5;
+}
+.shopping_cart_centent_name{
+    width: 100px;
+    background: greenyellow;
+}
+.shopping_cart_centent_color{
+    width: 100px;
+    background: darkorange;
+}
+.shopping_cart_centent_capacity{
+    width: 100px;
+    background: darkorange;
+}
+.shopping_cart_centent_stock{
+    width: 100px;
+    background: yellowgreen;
+}
+.shopping_cart_centent_price{
+    width: 120px;
+    background: indianred;
+}
+.shopping_cart_purchase{
+    width: 100px;
+    height: 50px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 50px;
+    border-radius:5px;
+}
 
 
 

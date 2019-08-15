@@ -9,18 +9,31 @@ use App\Models\User;
 use App\Models\Navigation;
 use App\Models\Commodity;
 use App\Models\Email;
+use App\Models\Shopping_cart;
 use Illuminate\Support\Facades\Session;
 use Mail;
 use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
+    public function shopping_cart(Request $request){
+        $user_id = session('user')['id'];
+        $commodity = Shopping_cart::where('id',$user_id)->first();
+//        echo "<pre>";
+//        echo $user_id;
+//        var_dump($commodity);
+//        exit;
+        return view('shopping_cart',['commodity'=>$commodity]);
+    }
     public function Personal_Pages(){    //个人主页
         return view('Personal_Pages');
     }//个人主页
     public function land(){    //登录页面
         return view('land');
     }//登录页面
+    public function send_mail(Request $request){
+        $email = $request->input('email');
+    }
     public function user_l(Request $request){    //登录页面的后端验证
         $name = $request->input('name');
         $password = $request->input('password');
@@ -55,6 +68,8 @@ class UserController extends Controller
         $name = $request->input('name');
         $password = $request->input('password');
         $password_ = $request->input('password_');
+        $email = $request->input('email');
+        $verification = $request->input('verification');
         if(empty($name)){
             $array = [
                 'code'=>0,
@@ -89,27 +104,42 @@ class UserController extends Controller
             ];
             return response()->json($array);
         }
-
-        $password = md5($password);
-        $arr = [
-            'password'=>$password,
-            'name'=>$name
-        ];
-        $user = User::insert($arr);
-        if($user){
-            $array = [
-                'code'=>1,
-                'info'=>'注册成功'
-            ];
-            return response()->json($array);
-        }else{
-            $array = [
+        $b = Email::where('email',$email)->limit(1)->orderBy('id', 'desc')->first()->toArray();
+        $time = $b['time'];
+        $time = date('Y-m-d H:i:s',strtotime("$time +1 min"));
+        if($b['password']!=$verification){
+            return response()->json([
                 'code'=>0,
-                'info'=>'注册失败'
-            ];
-            return response()->json($array);
+                'info'=>'秘钥错误',
+            ]);
+        }else{
+            if(now()>$time){
+                return response()->json([
+                    'code'=>0,
+                    'info'=>'秘钥已过期',
+                ]);
+            }else{
+                $password = md5($password);
+                $arr = [
+                    'password'=>$password,
+                    'name'=>$name
+                ];
+                $user = User::insert($arr);
+                if($user){
+                    $array = [
+                        'code'=>1,
+                        'info'=>'注册成功'
+                    ];
+                    return response()->json($array);
+                }else{
+                    $array = [
+                        'code'=>0,
+                        'info'=>'注册失败'
+                    ];
+                    return response()->json($array);
+                }
+            }
         }
-
 
 
     }//注册页面的后端验证
@@ -239,39 +269,43 @@ class UserController extends Controller
 
     public function email(Request $request){
         $email = $request->input('email');
-        $min = 100000;
-        $max = 999999;
-        $str =  mt_rand($min,$max);//发送内容
-        $array = [
-            'name'=>'您的注册码是'.$str,
-            'to'=>$email,
-            'subject'=>'邮件标题6666'
-        ];
+        if($email==""){
+            return response()->json([
+                'code'=>1,
+                'info'=>'请输入邮箱地址',
+            ]);
+        }else{
+            $min = 100000;
+            $max = 999999;
+            $str =  mt_rand($min,$max);//发送内容
+            $array = [
+                'name'=>'您的注册码是'.$str,
+                'to'=>$email,
+                'subject'=>'邮件标题6666'
+            ];
 //         Mail::send()的返回值为空，所以可以其他方法进行判断
-        $arr = [
-            'email'=>$email,
-            'password'=>$str,
-            'time'=>now(),
-        ];
-        $b = Email::insert($arr);
+            $arr = [
+                'email'=>$email,
+                'password'=>$str,
+                'time'=>now(),
+            ];
+            $b = Email::insert($arr);
 //        Redis::setex($email, 60*1, json_encode($arr));
-        $a = Mail::send('emails.test',['name'=>$array['name']],function($message) use ($array){
-            $to = $array['to'];  // $to = '1352165580@qq.com';发送给谁
-            $message ->to($array['to'])->subject($array['subject']);//subject('邮件测试')邮件标题
-        });
-//        // 返回的一个错误数组，利用此可以判断是否发送成功
-        dd(Mail::failures());
-
+            $a = Mail::send('emails.test',['name'=>$array['name']],function($message) use ($array){
+                $to = $array['to'];  // $to = '1352165580@qq.com';发送给谁
+                $message ->to($array['to'])->subject($array['subject']);//subject('邮件测试')邮件标题
+            });
+            // 返回的一个错误数组，利用此可以判断是否发送成功
+//            dd(Mail::failures());  打印的方法
+            return response()->json([
+                'code'=>1,
+                'info'=>'已发送邮件，请查看您的邮箱',
+            ]);
+        }
     }
     public function email_(Request $request){
         $email = $request->input('email');
         $verification = $request->input('verification');
-
-//        $arr = [
-//            'email'=>$email,
-//            'verification'=>$verification,
-//            'time'=>now(),
-//        ];
         $b = Email::where('email',$email)->limit(1)->orderBy('id', 'desc')->first()->toArray();
         $time = $b['time'];
         $time = date('Y-m-d H:i:s',strtotime("$time +1 min"));

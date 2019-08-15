@@ -20,6 +20,7 @@ Route::get('/a', function () {
 //不用登录可以访问的路由
 Route::group(['namespace'=>'Web','middleware'=>'web'],function (){
     Route::match(['post','get'],'/mzsc1','IndexController@mzsc1');
+    Route::match(['post','get'],'/','IndexController@mzsc1');
     Route::match(['post','get'],'/index','IndexController@index');
     Route::match(['post','get'],'mzsc','IndexController@mzsc');
     Route::match(['post','get'],'land','UserController@land');
@@ -33,9 +34,10 @@ Route::group(['namespace'=>'Web','middleware'=>'web'],function (){
     Route::match(['post','get'],'Commodity_details_','IndexController@Commodity_details_');
     Route::match(['post','get'],'search','IndexController@search');
     Route::match(['post','get'],'ceshi','UserController@ceshi');
-
+    Route::match(['post','get'],'shopping_cart','UserController@shopping_cart');
     Route::match(['post','get'],'/email','UserController@email');
     Route::match(['post','get'],'/email_','UserController@email_');
+    Route::match(['post','get'],'/insert_province','IndexController@insert_province');
 
 
 

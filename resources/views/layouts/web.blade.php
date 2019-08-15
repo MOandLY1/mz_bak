@@ -20,7 +20,7 @@ foreach ($Navigation_mzsc as $key => $value){
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="./css/mzsc1.css">
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-
+    <script src="./js/mzsc.js"></script>
 </head>
 <body onload="myFunction()">
 <div class="header">                   <!--头部-->
@@ -34,11 +34,11 @@ foreach ($Navigation_mzsc as $key => $value){
             <?php $a = 0; ?>
             <?php foreach($Navigation_mzsc as $key => $value){ ?>
             <?php $a++; ?>
-            <div id="<?php echo $a.'c'; ?>" onmouseover="Secondary_navigation(<?php echo $a; ?>)" onmouseout="Secondary_navigation_(<?php echo $a; ?>)"  class="header_menu fl <?php echo $a.'a'; ?>"><?php echo $value['name'] ?>
+            <div id="<?php echo $a.'c'; ?>" onmouseover="_Secondary_navigation(<?php echo $a; ?>)" onmouseout="_Secondary_navigation_(<?php echo $a; ?>)"  class="header_menu fl <?php echo $a.'a'; ?>"><?php echo $value['name'] ?>
             </div>
 
-            <div onmouseout="leave_secondary_nav(<?php echo $a; ?>)" class="Secondary_navigation <?php echo $a.'bb' ?> "><!--二级导航栏，绝对定位块-->
-
+            <div onmouseout="_leave_secondary_nav(<?php echo $a; ?>)" id="<?php echo $a.'bb' ?>" class="Secondary_navigation <?php echo $a.'bb' ?> "><!--二级导航栏，绝对定位块-->
+<?php echo $a ?>
             </div>
 
             <?php } ?>
@@ -104,7 +104,6 @@ foreach ($Navigation_mzsc as $key => $value){
 </div>
 
 </div>                         <!--底部-->
-<script src="./js/mzsc.js"></script>
 <script>
     $.ajaxSetup({
         headers: {

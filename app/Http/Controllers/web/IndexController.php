@@ -56,17 +56,30 @@ class IndexController extends Controller
 
     public function mzsc1(Request $request){
         $Navigation_mzsc = Navigation::where('state','0')->get()->toArray();//查询
-//        foreach ($Navigation_mzsc['id'] as $ke =>$val){
-//            $Navigation_mzsc_id = Commodty::where('id',$Navigation_mzsc['id'])->get();
-//        }
-        //查询的手机的内容
+
+
         $phone_name =Navigation::where('name','魅族手机')->get()->toArray();
         foreach($phone_name as $key =>$value){
             $phone_information = Commodity::where('superior_id',$value['id'])->limit(10)->orderBy('id', 'desc')->get()->toArray(); //ordeby,设置排序，从前往后或者从后往前，第一个是字段名，第二个是排序规则
+//            echo "<pre>";
+//            var_dump($phone_information);
+//            exit;
         }
+//        echo "<pre>";
+//        var_dump($phone_information);
+//        exit;
+
+        foreach ($phone_information as $ke => $va) {
+            $phone_commodity_stock = Commodity_details::where('superior_id',$va['id'])->where('supervisor_display',1)->select('id')->get()->toArray();
+//            echo "<pre>";
+//            var_dump($phone_commodity_stock);
+//            exit;
+        }
+
         foreach($phone_information as $k => $v){
             $phone_information[$k]['img'] = json_decode($v['img']);
         }
+
 
         //查询的声学的内容
         $voice_name =Navigation::where('name','魅族声学')->get()->toArray();
@@ -77,6 +90,7 @@ class IndexController extends Controller
             $voice_information[$k1]['img'] = json_decode($v1['img']);
         }
 
+
         //查询的配件的内容
         $parts_name =Navigation::where('name','智能配件')->get()->toArray();
         foreach($parts_name as $key2 =>$value2){
@@ -85,6 +99,7 @@ class IndexController extends Controller
         foreach($parts_information as $k2 => $v2){
             $parts_information[$k2]['img'] = json_decode($v2['img']);
         }
+
 
         //查询的魅族生活的内容
         $life_name =Navigation::where('name','魅族生活')->get()->toArray();
@@ -95,11 +110,11 @@ class IndexController extends Controller
             $life_information[$k3]['img'] = json_decode($v3['img']);
         }
 
-        return view('mzsc1',['Navigation_mzsc'=>$Navigation_mzsc,'voice_information'=>$voice_information,'phone_information'=>$phone_information,'parts_information'=>$parts_information,'life_information'=>$life_information]);
+
+        return view('mzsc1',['Navigation_mzsc'=>$Navigation_mzsc,'voice_information'=>$voice_information,'phone_information'=>$phone_information,'$phone_commodity_stock','phone_commodity_stock'=>$phone_commodity_stock,'parts_information'=>$parts_information,'life_information'=>$life_information]);
     }
 
-    public function Commodity_details(Request $request)
-    {
+    public function Commodity_details(Request $request){//详情页面
         $commodity_id = $request->input('id',60); //如果没有值传过来，那默认（default）是60
 
         $commodity_information = Commodity_details::where('superior_id',$commodity_id)->where('state',0)->limit(1)->orderBy('id', 'asc')->first()->toArray();
@@ -115,7 +130,7 @@ class IndexController extends Controller
 //        var_dump($commodity_information);
 //        exit;
         return view('Commodity_details',['commodity_information'=>$commodity_information]);
-    }
+    }//详情页面
     public function query_commodity(Request $request){    //获取所有的商品
         $commodity =Commodity::get()->toArray();
         return response()->json([
@@ -210,7 +225,14 @@ class IndexController extends Controller
             'info'=>'添加成功'
         ]);
     }//添加一级导航栏的内容
-
+    public function insert_province(Request $request){
+        $province = $request->input('province');
+        return response()->json([
+            'code'=>1,
+            'info'=>'添加成功',
+            'data'=>$province
+        ]);
+    }
 
 
 

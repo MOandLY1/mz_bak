@@ -83,41 +83,7 @@ $Navigation_mzsc_id = Commodity::where('id',$value['id'])->get();
 
 
         <div class="main">                                <!--主体-->
-            <div class="main_Discount">                   <!--折扣-->
-                <div class="main_Discount_option fl">         <!--折扣选项-->
-                </div>
-                <div class="main_Discount_centent fl">
-                    <img src="./img/10.png" alt="">
-                </div>
-                <div class="main_Discount_centent fl">
-                    <img src="./img/11.png" alt="">
-                </div>
-                <div class="main_Discount_centent fl">
-                    <img src="./img/12.png" alt="">
-                </div>
-                <div class="main_Discount_centent fl">
-                    <img src="./img/13.png" alt="">
-                </div>
-            </div>                 <!--折扣-->
 
-            <div class="main_Recommend">                   <!--推荐-->
-                <div class="Recommend_h">
-                    <div class="Recommend_header_l"></div>
-                    <div class="Recommend_header_r"></div>
-                </div>
-                <div class="Recommend_m">
-                    <div class="Recommend_main fl"><img src="./img/rptj/rptj1.png"></div>
-                    <div class="Recommend_main fl"><img src="./img/rptj/rptj2.png"></div>
-                    <div class="Recommend_main fl"><img src="./img/rptj/rptj3.png"></div>
-                    <div class="Recommend_main fl"><img src="./img/rptj/rptj4.png"></div>
-                    <div class="Recommend_main fl"><img src="./img/rptj/rptj5.png"></div>
-                </div>
-            </div>            <!--推荐-->
-
-            <div class="main_Advertisement">              <!--广告-->
-                <img class="main_Advertisement_Close " src="./img/32.png">
-                <img class="z-index " src="./img/3.png" alt="">
-            </div>            <!--广告-->
 
             <div class="main_phone">                      <!--手机-->
 
@@ -141,7 +107,7 @@ $Navigation_mzsc_id = Commodity::where('id',$value['id'])->get();
 
                             <div class="phone_top_img"><img class="limit_img" src="<?php echo $value['img'][0] ?>"></div>
                             <div class="phone_top_name"><?php echo $value['name'] ?></div>
-                            <div class="phone_top_price"><?php echo $value['id'] ?></div>
+                            <div class="phone_top_price"></div>
                         </div>
                     <?php } ?>
                 </div>
